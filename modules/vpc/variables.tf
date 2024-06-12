@@ -43,7 +43,9 @@ variable "tags" {
   description = "Tags to be applied to resources"
   type        = map(string)
 
-  default = {}
+  default = {
+    module = "vpc"
+  }
 }
 
 variable "vpc_cidr" {
