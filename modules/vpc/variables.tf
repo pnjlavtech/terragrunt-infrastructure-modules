@@ -1,6 +1,6 @@
 variable "database_subnets" {
   description = "Database subnets"
-  type        = []
+  type        = list(string)
 }
 
 variable "eks_name" {
@@ -17,7 +17,7 @@ variable "environment" {
 
 variable "private_subnets" {
   description = "Private subnets"
-  type        = []
+  type        = list(string)
 }
 
 variable "public_domain" {
@@ -29,7 +29,7 @@ variable "public_domain" {
 
 variable "public_subnets" {
   description = "Public subnets"
-  type        = []
+  type        = list(string)
 }
 
 variable "region" {
