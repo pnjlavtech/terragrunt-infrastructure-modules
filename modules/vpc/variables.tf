@@ -13,11 +13,6 @@ variable "database_subnet_tags" {
   }
 }
 
-variable "eks_name" {
-  description = "Kubernetes EKS Name"
-  type        = string
-}
-
 variable "environment" {
   description = "Environment name for project"
   type        = string
@@ -39,13 +34,6 @@ variable "private_subnet_tags" {
   }
 }
 
-# variable "public_domain" {
-#   description = "Public DNS zone name"
-#   type        = string
-
-#   default = "$DOMAINNAME"
-# }
-
 variable "public_subnets" {
   description = "Public subnets"
   type        = list(string)
@@ -60,12 +48,6 @@ variable "public_subnet_tags" {
     module-component-type = "subnet-public"
   }
 }
-
-# variable "region" {
-#   description = "AWS Region where resources will be deployed"
-#   type        = string
-#   default     = "us-west-2"
-# }
 
 variable "tags" {
   description = "Tags to be applied to resources"

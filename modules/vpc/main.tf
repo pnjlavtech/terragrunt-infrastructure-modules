@@ -58,20 +58,6 @@ module "vpc" {
   public_subnet_tags                              = var.public_subnet_tags
   single_nat_gateway                              = true
   tags                                            = var.tags
-
-  # database_subnet_tags = {
-  #   "module-component"      = "subnet"
-  #   "module-component-type" = "subnet-database"
-  # }
-  # private_subnet_tags = {
-  #   "module-component"      = "subnet"
-  #   "module-component-type" = "subnet-private"
-  # }
-  # public_subnet_tags = {
-  #   "kubernetes.io/cluster/${var.eks_name}" = "shared"
-  #   "kubernetes.io/role/elb"                = 1
-  # }
-
 }
 
 
