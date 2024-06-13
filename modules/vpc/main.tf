@@ -41,6 +41,7 @@ module "vpc" {
   create_flow_log_cloudwatch_iam_role             = true
   create_flow_log_cloudwatch_log_group            = true
   database_subnets                                = var.database_subnets
+  database_subnet_tags                            = var.database_subnet_tags
   enable_dhcp_options                             = true
   enable_dns_hostnames                            = true
   enable_dns_support                              = true
@@ -52,14 +53,27 @@ module "vpc" {
   one_nat_gateway_per_az                          = false
   private_subnet_suffix                           = "private"
   private_subnets                                 = var.private_subnets
+  private_subnet_tags                             = var.private_subnet_tags
   public_subnets                                  = var.public_subnets
-  public_subnet_tags = {
-    "kubernetes.io/cluster/${var.eks_name}" = "shared"
-    "kubernetes.io/role/elb"                  = 1
-  }
-  single_nat_gateway = true
-  tags               = var.tags
+  public_subnet_tags                              = var.public_subnet_tags
+  single_nat_gateway                              = true
+  tags                                            = var.tags
+
+  # database_subnet_tags = {
+  #   "module-component"      = "subnet"
+  #   "module-component-type" = "subnet-database"
+  # }
+  # private_subnet_tags = {
+  #   "module-component"      = "subnet"
+  #   "module-component-type" = "subnet-private"
+  # }
+  # public_subnet_tags = {
+  #   "kubernetes.io/cluster/${var.eks_name}" = "shared"
+  #   "kubernetes.io/role/elb"                = 1
+  # }
+
 }
+
 
 module "vpc_endpoints" {
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
