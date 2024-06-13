@@ -35,8 +35,7 @@ variable "public_subnets" {
 variable "region" {
   description = "AWS Region where resources will be deployed"
   type        = string
-
-  default = "us-west-2"
+  default     = "us-west-2"
 }
 
 variable "tags" {
@@ -51,4 +50,5 @@ variable "tags" {
 variable "vpc_cidr" {
   description = "CIDR block for the VPC where resources will be deployed"
   type        = string
+  default     = "10.230.0.0/16"
 }
