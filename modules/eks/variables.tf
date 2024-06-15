@@ -37,6 +37,11 @@ variable "environment" {
   default = "eks_argocd"
 }
 
+variable "private_subnets" {
+  description = "List of private subnet ids"
+  type        = list(string)
+}
+
 variable "public_domain" {
   description = "Public DNS zone name"
   type        = string
@@ -49,11 +54,6 @@ variable "region" {
   type        = string
 
   default = "us-west-2"
-}
-
-variable "subnet_ids" {
-  description = "List of private subnet ids"
-  type        = list(string)
 }
 
 variable "tags" {

@@ -89,7 +89,7 @@ module "eks" {
   cluster_tags = merge(var.tags, { Name = var.eks_name })
 
   vpc_id     = var.vpc_id
-  subnet_ids = var.subnet_ids
+  subnet_ids = var.private_subnets
 }
 
 module "vpc_cni_irsa" {
@@ -117,7 +117,7 @@ resource "aws_eks_node_group" "spot" {
   cluster_name    = module.eks.cluster_name
   node_group_name = "spot_workers"
   node_role_arn   = "arn:aws:iam::$AWSACCTNUM:role/AmazonEKSNodeRole"
-  subnet_ids      = module.vpc.private_subnets
+  subnet_ids      = module.eks.subnet_ids
 
   scaling_config {
     desired_size = 2
