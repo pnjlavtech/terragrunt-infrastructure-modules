@@ -117,7 +117,9 @@ resource "aws_eks_node_group" "spot" {
   cluster_name    = module.eks.cluster_name
   node_group_name = "spot_workers"
   node_role_arn   = "arn:aws:iam::$AWSACCTNUM:role/AmazonEKSNodeRole"
-  subnet_ids      = module.eks.subnet_ids
+  subnet_ids      = var.private_subnets
+  # subnet_ids      = module.eks.subnet_ids[*].id # var.private_subnets
+
 
   scaling_config {
     desired_size = 2
