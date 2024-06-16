@@ -40,6 +40,12 @@ variable "environment" {
 variable "private_subnets" {
   description = "List of private subnet ids"
   type        = list(string)
+
+  default = [
+     "subnet-027fab9b2cb81747e",
+     "subnet-0270b810f825b7a7c",
+     "subnet-0832b43895780e4f6",
+    ]
 }
 
 variable "public_domain" {
@@ -68,4 +74,7 @@ variable "tags" {
 variable "vpc_id" {
   description = "VPC ID"
   type        = string
+
+  default = "vpc-0d92a29a969c4f59d"
+
 }
