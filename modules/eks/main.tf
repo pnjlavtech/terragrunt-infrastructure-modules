@@ -1,17 +1,3 @@
-# terraform {
-#   required_version = ">= 1.1"
-
-
-
-#   required_providers {
-#     aws = {
-#       source  = "hashicorp/aws"
-#       version = "~> 5.5"
-#     }
-#   }
-# }
-
-
 provider "kubernetes" {
   host                   = module.eks.cluster_endpoint
   cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
@@ -31,20 +17,12 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.5"
     }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.13.1"
-    }
     kubernetes = {
       source  = "hashicorp/kubernetes"
       version = "2.29.0"
     }
   }
 }
-
-
-
-
 
 
 module "eks" {
@@ -116,9 +94,8 @@ module "vpc_cni_irsa" {
 resource "aws_eks_node_group" "spot" {
   cluster_name    = module.eks.cluster_name
   node_group_name = "spot_workers"
-  node_role_arn   = "arn:aws:iam::$AWSACCTNUM:role/AmazonEKSNodeRole"
+  node_role_arn   = "arn:aws:iam::${data.aws_caller_identity.this.account_id}:role/AmazonEKSNodeRole"
   subnet_ids      = var.private_subnets
-  # subnet_ids      = module.eks.subnet_ids[*].id # var.private_subnets
 
 
   scaling_config {
