@@ -16,19 +16,20 @@ variable "argocd_helm_settings" {
   }
 }
 
-# variable "eks_cluster_version" {
-#   description = "Kubernetes version for EKS cluster"
-#   type        = string
+variable "cluster_certificate_authority_data" {
+  description = "Kubernetes cluster certificate authority data (module.eks.cluster_ca_certificate)"
+  type        = string
+}
 
-#   default = "1.27"
-# }
+variable "cluster_endpoint" {
+  description = "Kubernetes cluster endpoint (module.eks.host)"
+  type        = string
+}
 
-# variable "environment" {
-#   description = "Environment name for project"
-#   type        = string
-
-#   default = "eks_argocd"
-# }
+variable "cluster_name" {
+  description = "Kubernetes cluster name"
+  type        = string
+}
 
 variable "public_domain" {
   description = "Public DNS zone name"
@@ -36,13 +37,6 @@ variable "public_domain" {
 
   default = "pnjlavtech.com"
 }
-
-# variable "region" {
-#   description = "AWS Region where resources will be deployed"
-#   type        = string
-
-#   default = "us-west-2"
-# }
 
 variable "tags" {
   description = "Tags to be applied to resources"
@@ -52,10 +46,3 @@ variable "tags" {
     module = "argocd"
   }
 }
-
-# variable "vpc_cidr" {
-#   description = "CIDR block for the VPC where resources will be deployed"
-#   type        = string
-
-#   default = "10.230.0.0/16"
-# }
