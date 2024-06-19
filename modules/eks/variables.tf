@@ -9,7 +9,7 @@ variable "eks_cluster_version" {
   description = "Kubernetes version for EKS cluster"
   type        = string
 
-  default = "1.29"
+  default = "1.30"
 }
 
 variable "environment" {
@@ -23,6 +23,10 @@ variable "private_subnets" {
   description = "List of private subnet ids"
   type        = list(string)
 
+  default = ["subnet-0037719e19ca630b5", 
+             "subnet-0c40e9b3d7602d3aa", 
+             "subnet-07c154f3a5adccd00" 
+  ]
 }
 
 variable "public_domain" {
