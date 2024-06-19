@@ -1,33 +1,33 @@
-terraform {
-  required_version = "1.8.1"
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "5.54.1"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.31.0"
-    }
-  }
-}
-
-
 provider "kubernetes" {
   host                   = module.eks.cluster_endpoint
   cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
 
   exec {
-    api_version = "client.authentication.k8s.io/v1beta1"
-    args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
+    api_version = "client.authentication.k8s.io/v1alpha1"
     command     = "aws"
+    args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
+  }
+}
+
+
+terraform {
+  required_version = ">= 1.5.3"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.5"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "2.29.0"
+    }
   }
 }
 
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "20.14.0"
+  version = "~> 20.0"
 
   cluster_name                    = var.eks_name
   cluster_version                 = var.eks_cluster_version
@@ -72,7 +72,7 @@ module "eks" {
 
 module "vpc_cni_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "5.39.1"
+  version = "~> 5.28"
 
   role_name_prefix = "${var.environment}_eks"
 
