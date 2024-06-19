@@ -2,7 +2,7 @@ variable "argocd_chart_version" {
   description = "ArgoCD Helm Chart Version"
   type        = string
 
-  default = "7.1.4"
+  default = "6.7.18"
 }
 
 variable "argocd_helm_settings" {
