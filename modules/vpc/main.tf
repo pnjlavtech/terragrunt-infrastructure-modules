@@ -1,12 +1,12 @@
 terraform {
-  required_version = ">= 1.1"
+  required_version = "1.8.1"
 
 
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.5"
+      version = "5.54.1"
     }
   }
 }
@@ -27,7 +27,7 @@ locals {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.8.1"
+  version = "5.8.1"
 
   database_subnet_ipv6_prefixes                 = [6, 7, 8]
   enable_ipv6                                   = true
@@ -63,7 +63,7 @@ module "vpc" {
 
 module "vpc_endpoints" {
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "~> 5.8.1"
+  version = "5.8.1"
 
   vpc_id = module.vpc.vpc_id
   tags   = var.tags
