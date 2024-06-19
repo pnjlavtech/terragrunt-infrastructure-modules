@@ -1,32 +1,46 @@
-provider "kubernetes" {
-  host                   = var.cluster_endpoint
-  cluster_ca_certificate = base64decode(var.cluster_certificate_authority_data)
-
-  exec {
-    api_version = "client.authentication.k8s.io/v1alpha1"
-    command     = "aws"
-    args        = ["eks", "get-token", "--cluster-name", var.cluster_name]
-  }
-}
-
-
 terraform {
-  required_version = ">= 1.5.3"
+  required_version = "= 1.8.1"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.5"
+      version = "~> 5.54.1"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.13.1"
+      version = "2.14.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.29.0"
+      version = "2.31.0"
     }
   }
 }
+
+# provider "kubernetes" {
+#   host                   = var.cluster_endpoint
+#   cluster_ca_certificate = base64decode(var.cluster_certificate_authority_data)
+
+#   exec {
+#     api_version = "client.authentication.k8s.io/v1beta1"
+#     args        = ["eks", "get-token", "--cluster-name", var.cluster_name]
+#     command     = "aws"
+#   }
+# }
+
+
+
+provider "helm" {
+  kubernetes {
+    host                   = var.cluster_endpoint
+    cluster_ca_certificate = base64decode(var.cluster_certificate_authority_data)
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      args        = ["eks", "get-token", "--cluster-name", var.cluster_name]
+      command     = "aws"
+    }
+  }
+}
+
 
 locals {
   argocd_domain_name = "${local.kubernetes_namespace}.${var.public_domain}"
