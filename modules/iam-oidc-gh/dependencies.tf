@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "oidc" {
 
     condition {
       test     = "StringLike"
-      values   = ["repo:pnjlavtech/"]
+      values   = ["repo:pnjlavtech/*"]
       variable = "token.actions.githubusercontent.com:sub"
     }
   }
