@@ -30,13 +30,57 @@ data "aws_iam_policy_document" "oidc" {
 data "aws_iam_policy_document" "deploy" {
   statement {
     effect  = "Allow"
+    not_actions = [
+        "iam:*",
+        "organizations:*",
+        "account:*"
+      ]
+    resources = ["*"]
+  }
+  statement {
+    effect  = "Allow"
     actions = [
-      "s3:*",
-    ]
+        "iam:CreateServiceLinkedRole",
+        "iam:DeleteServiceLinkedRole",
+        "iam:ListRoles",
+        "iam:GetRole",
+        "iam:GetPolicy",
+        "organizations:DescribeOrganization",
+        "account:ListRegions",
+        "account:GetAccountInformation"
+      ]
     resources = ["*"]
   }
 }
 
+
+
+# {
+#   "Version" : "2012-10-17",
+#   "Statement" : [
+#     {
+#       "Effect" : "Allow",
+#       "NotAction" : [
+#         "iam:*",
+#         "organizations:*",
+#         "account:*"
+#       ],
+#       "Resource" : "*"
+#     },
+#     {
+#       "Effect" : "Allow",
+#       "Action" : [
+#         "iam:CreateServiceLinkedRole",
+#         "iam:DeleteServiceLinkedRole",
+#         "iam:ListRoles",
+#         "organizations:DescribeOrganization",
+#         "account:ListRegions",
+#         "account:GetAccountInformation"
+#       ],
+#       "Resource" : "*"
+#     }
+#   ]
+# }
 
 # {
 #   "Effect": "Allow",
